@@ -15,7 +15,6 @@ function App() {
     { title: 'Milk', cost: 20, id: Math.random() },
     { title: 'Eggs', cost: 40, id: Math.random() },
     { title: 'Cheese', cost: 50, id: Math.random() },
-    { title: 'Honey', cost: 35, id: Math.random() },
   ]);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -45,7 +44,6 @@ function App() {
     setItems((prevState) => {
       return prevState.filter((item) => item.id !== id);
     });
-    console.log('removed');
   };
 
   const itemsEl = items.map((item) => {
