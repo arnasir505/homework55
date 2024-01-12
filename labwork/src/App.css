@@ -1,7 +1,48 @@
 #root {
-  max-width: 1280px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 10px;
+  display: flex;
+}
+
+.ingredientsWrap {
+  width: 50%;
+}
+
+.ingredientImg {
+  max-width: 60px;
+  height: auto;
+}
+
+.ingredient {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.ingr-name {
+  margin-left: 5px;
+}
+
+.count-wrap {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.trash {
+  max-width: 30px;
+  height: auto;
+}
+
+.trash-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.totalPrice {
   text-align: center;
 }
 
