@@ -2,7 +2,9 @@ import { useState } from 'react';
 import './App.css';
 import { IngredientsData, basePrice } from './data';
 import { Ingredient } from './types';
-import trashIcon from './assets/ic-trash.png';
+import IngredientComp from './components/IngredientComp';
+import Burger from './components/Burger';
+import TotalPrice from './components/TotalPrice';
 
 function App() {
   const [ingredients, setIngredients] = useState([
@@ -12,7 +14,7 @@ function App() {
     { name: 'Meat', count: 0 },
   ]);
 
-  const handleClick = (ingredientParam: Ingredient) => {
+  const addItem = (ingredientParam: Ingredient) => {
     setIngredients((prevState) => {
       return prevState.map((ingredient) => {
         if (ingredient.name === ingredientParam.name) {
@@ -24,21 +26,28 @@ function App() {
     });
   };
 
+  const removeItem = (name: string) => {
+    setIngredients((prevState) => {
+      return prevState.map((ingredient) => {
+        if (ingredient.name === name) {
+          return { ...ingredient, count: 0 };
+        } else {
+          return ingredient;
+        }
+      });
+    });
+  };
+
   const ingredientsEl = IngredientsData.map((ingredient, index) => {
     const currentIngredient = ingredients[index];
     return (
-      <div key={ingredient.name} className='ingredient'>
-        <button type='button' onClick={() => handleClick(ingredient)}>
-          <img src={ingredient.image} alt='ingr' className='ingredientImg' />
-        </button>
-        <span className='ingr-name'>{ingredient.name}</span>
-        <div className='count-wrap'>
-          <span>{currentIngredient.count}</span>
-          <button type='button' className='trash-btn'>
-            <img src={trashIcon} alt='trash' className='trash' />
-          </button>
-        </div>
-      </div>
+      <IngredientComp
+        key={ingredient.name}
+        ingredient={ingredient}
+        addItem={addItem}
+        count={currentIngredient.count}
+        removeItem={removeItem}
+      />
     );
   });
 
@@ -60,15 +69,8 @@ function App() {
     <>
       <div className='ingredientsWrap'>{ingredientsEl}</div>
       <div className='burgerWrap'>
-        <div className='Burger'>
-          <div className='BreadTop'>
-            <div className='Seeds1'></div>
-            <div className='Seeds2'></div>
-          </div>
-          {burgerParts}
-          <div className='BreadBottom'></div>
-        </div>
-        <h3 className='totalPrice'>Total price: {totalPrice}</h3>
+        <Burger burgerParts={burgerParts} />
+        <TotalPrice totalPrice={totalPrice} />
       </div>
     </>
   );
